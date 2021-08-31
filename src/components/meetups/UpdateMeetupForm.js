@@ -1,17 +1,19 @@
-import { useRef } from 'react';
+import { useRef } from 'react';  // I believe this is the problem 
+                                //I may need to return the history and the props
 
 import Card from '../ui/Card';
 import classes from './NewMeetupForm.module.css';
 
-function NewMeetupForm(props) { //this references the data in the card
-    const titleInputRef = useRef();
+function UpdateMeetupForm(props) { // THIS IS WHAT NEEDS TO CHANGE!!!!!
+    
+    const titleInputRef = useRef(props.title);
     const imageInputRef = useRef();
     const addressInputRef = useRef();
     const descriptionInputRef = useRef();
 
     
     
-    function submitHandler(event) { //this is what happens when the submit button is clicked
+    function submitHandler(event) { // I believe the submit will remain remotely the same
         event.preventDefault();
 
         const enteredTitle = titleInputRef.current.value;
@@ -19,24 +21,24 @@ function NewMeetupForm(props) { //this references the data in the card
         const enteredAddress = addressInputRef.current.value;
         const enteredDescription = descriptionInputRef.current.value;
 
-        const meetupData = { //this passed the clicked data to the appropriate fields in the database
+        const updateMeetupData = { //this will update the changed values
             title: enteredTitle,
             image: enteredImage,
             address: enteredAddress,
             description: enteredDescription, 
         };
 
-        // this passes the data to the function in the pages/NewMeetup
-        props.onAddMeetup(meetupData); 
+        props.onUpdateMeetup(updateMeetupData);
 
     }
-    
+    //once all the data above is corrected I believe that this information will not need to change
     return(
         <Card>
             <form className={classes.form} onSubmit={submitHandler}>
                 <div className={classes.control}>
                     <label htmlFor='title'>Meetup Title</label>
-                    <input type='text' required id='title' ref={titleInputRef}/>
+                    <input type='text' required id='title' ref={props.title}/>
+                    <p>{props.title}</p>
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='image'>Meetup Image</label>
@@ -51,7 +53,7 @@ function NewMeetupForm(props) { //this references the data in the card
                     <textarea id='description' required rows='5' ref={descriptionInputRef}/>
                 </div>
                 <div className={classes.actions}>
-                    <button>Add Meetup</button> 
+                    <button>Update Meetup</button> 
                 </div>
 
             </form>
@@ -65,4 +67,5 @@ function NewMeetupForm(props) { //this references the data in the card
 
 }
 
-export default NewMeetupForm;
+export default UpdateMeetupForm;
+

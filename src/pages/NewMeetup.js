@@ -5,6 +5,7 @@ function NewMeetupPage() {
    const history = useHistory();
    
     function addMeetupHandler(meetupData) {
+
     fetch('https://fir-react-scheduler-default-rtdb.firebaseio.com/meetups.json', 
     {
         method: 'POST',

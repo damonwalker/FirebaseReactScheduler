@@ -3,6 +3,7 @@ import AllMeetupsPage from './pages/AllMeetUps';
 import NewMeetupPage from './pages/NewMeetup';
 import FavoritesPage from './pages/Favorites';
 import Layout from './components/layout/Layout';
+import UpdateMeetupPage from './pages/UpdateMeetUps';
 
 function App() {
   // localhost:3000
@@ -17,6 +18,9 @@ function App() {
       </Route>
       <Route path='/favorites'>
         <FavoritesPage />
+      </Route>
+      <Route path='/update'>
+        <UpdateMeetupPage/>
       </Route>
       </Switch>
     </Layout>

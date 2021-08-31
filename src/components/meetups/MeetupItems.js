@@ -1,10 +1,12 @@
 import { useContext } from 'react';
+import {useHistory} from 'react-router-dom' 
 
 import Card from '../ui/Card';
 import classes from './MeetupItem.module.css';
 import FavoritesContext from '../../store/favorite-context';
 
 function MeetupItem(props) {
+    const history = useHistory();
 
     const favoritesCtx = useContext(FavoritesContext);
 
@@ -24,6 +26,21 @@ function MeetupItem(props) {
         }
     }
 
+    
+    function deleteMeetupHandler() {
+        
+        fetch(`https://fir-react-scheduler-default-rtdb.firebaseio.com/meetups/${props.id}.json`, 
+        {
+            method: 'DELETE',
+            headers: {
+                'Contype-Type': 'application/json'
+            }
+        }).then(() => {
+            history.go('/');
+        });
+    
+       }
+
     return (
         <li className={classes.item}>
             <Card>
@@ -38,6 +55,12 @@ function MeetupItem(props) {
                 <div className={classes.actions}>
                     <button onClick={toggleFavoriteStatusHandler}>
                         {itemIsFavorite ? 'Remove from Favorites' : 'To Favorites'}
+                    </button>
+                    <button onClick={()=>{window.location.href ="update"}}>
+                        Update
+                    </button>
+                    <button onClick={deleteMeetupHandler}>
+                        Delete
                     </button>
                 </div>
             </Card>

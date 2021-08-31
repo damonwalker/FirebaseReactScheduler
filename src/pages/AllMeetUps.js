@@ -16,7 +16,7 @@ function AllMeetupsPage() {
         })
         .then(data => {
            const meetups = [];
-            
+            console.log(meetups)
             for (const key in data) {
                 const meetup = {
                     id: key,
